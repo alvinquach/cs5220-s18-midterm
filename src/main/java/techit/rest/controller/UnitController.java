@@ -17,16 +17,16 @@ public class UnitController {
     @Autowired
     private UnitDao unitDao;
 
-    @RequestMapping(value = "/unit/{id}", method = RequestMethod.GET)
-    public Unit getUnit( @PathVariable Long id )
-    {
-        return unitDao.getUnit( id );
-    }
-
-    @RequestMapping(value = "/unit/", method = RequestMethod.GET)
+    @RequestMapping(value = "/units", method = RequestMethod.GET)
     public List<Unit> getUnits()
     {
         return unitDao.getUnits();
+    }
+
+    @RequestMapping(value = "/units/{id}", method = RequestMethod.GET)
+    public Unit getUnit( @PathVariable Long id )
+    {
+        return unitDao.getUnit( id );
     }
 
 }

@@ -17,16 +17,16 @@ public class TicketController {
     @Autowired
     private TicketDao ticketDao;
 
-    @RequestMapping(value = "/ticket/{id}", method = RequestMethod.GET)
-    public Ticket getTicket( @PathVariable Long id )
-    {
-        return ticketDao.getTicket( id );
-    }
-
-    @RequestMapping(value = "/ticket/", method = RequestMethod.GET)
+    @RequestMapping(value = "/tickets", method = RequestMethod.GET)
     public List<Ticket> getTickets()
     {
         return ticketDao.getTickets();
+    }
+
+    @RequestMapping(value = "/tickets/{id}", method = RequestMethod.GET)
+    public Ticket getTicket( @PathVariable Long id )
+    {
+        return ticketDao.getTicket( id );
     }
 
 }

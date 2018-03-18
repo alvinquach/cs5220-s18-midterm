@@ -31,7 +31,8 @@ public class UserDaoTest extends AbstractTransactionalTestNGSpringContextTests {
     {
         User user = new User();
         user.setUsername( "Tom" );
-        user.setPassword( "abcd" );
+        user.setHash(
+            "$2a$10$sVTyojWXADG2e2gG4RlOLe9LJxkP7KHhnpPHAvClt5KPdpVJMMN9S" );
         user.setEmail( "tom@localhost" );
         user = userDao.saveUser( user );
 

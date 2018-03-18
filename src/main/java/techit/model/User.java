@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -34,9 +36,15 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     private String username;
 
+    // This field is used for getting a password in plain text from a user
+    // when adding/editing a user. It is NOT stored in database.
+    @JsonProperty(access = Access.WRITE_ONLY)
+    @Transient
+    private String password;
+
     @JsonProperty(access = Access.WRITE_ONLY)
     @Column(nullable = false)
-    private String password;
+    private String hash;
 
     private boolean enabled = true;
 
@@ -53,11 +61,18 @@ public class User implements Serializable {
 
     private String department;
 
+    @JsonIgnore
     @ManyToOne
     private Unit unit;
 
     public User()
     {
+    }
+
+    // Use unitId instead of unit in serialization
+    public Long getUnitId()
+    {
+        return unit != null ? unit.getId() : null;
     }
 
     public Long getId()
@@ -98,6 +113,16 @@ public class User implements Serializable {
     public void setPassword( String password )
     {
         this.password = password;
+    }
+
+    public String getHash()
+    {
+        return hash;
+    }
+
+    public void setHash( String hash )
+    {
+        this.hash = hash;
     }
 
     public String getFirstName()
@@ -168,12 +193,6 @@ public class User implements Serializable {
     public void setEnabled( boolean enabled )
     {
         this.enabled = enabled;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "[" + id + ", " + username + ", " + password + "]";
     }
 
 }

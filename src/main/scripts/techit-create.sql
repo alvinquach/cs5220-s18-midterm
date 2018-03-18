@@ -17,7 +17,7 @@ create table users (
     id          bigint primary key,
     type        varchar(255) default 'REGULAR',
     username    varchar(255) not null unique,
-    password    varchar(255) not null,
+    hash        varchar(255) not null,
     enabled     boolean not null default true,
     first_name  varchar(255),
     last_name   varchar(255),
