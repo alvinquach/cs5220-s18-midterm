@@ -1,6 +1,5 @@
 package techit.rest.authentication;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class TokenAuthenticationService {
 	public final String jwtPrefix = "Bearer ";
 
 	public final String jwtSecret = "secret";
-
+	
 	public boolean validateToken(String token, Set<Type> allowedTypes) {
 		if (token != null && token.startsWith(jwtPrefix)) {
 			token = token.substring(jwtPrefix.length());
@@ -73,7 +72,6 @@ public class TokenAuthenticationService {
 				claims.put("id", user.getId());
 				String jwt = Jwts.builder()
 						.setClaims(claims)
-						.setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
 						.signWith(SignatureAlgorithm.HS512, jwtSecret)
 						.compact();
 				return jwtPrefix + jwt;
