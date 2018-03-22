@@ -34,7 +34,7 @@
 
     <tx:annotation-driven />
 
-    <context:component-scan base-package="techit.model" />
+    <context:component-scan base-package="techit" />
 
 </beans>
 

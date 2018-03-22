@@ -27,12 +27,14 @@
     </bean>
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    
+    <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
     <context:annotation-config />
 
     <tx:annotation-driven />
 
-    <context:component-scan base-package="techit.model" />
+    <context:component-scan base-package="techit" />
 
 </beans>
 
