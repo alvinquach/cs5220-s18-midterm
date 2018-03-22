@@ -46,7 +46,7 @@ public class TokenAuthenticationService {
 						if (allowedTypes.contains(type)) {
 							return true;
 						}
-						throw new RestException(401, "User does not have access to this API");
+						throw new RestException(403, "You do not have access to this API");
 					}
 					else {
 						return true;
